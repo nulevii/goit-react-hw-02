@@ -23,13 +23,16 @@ class ContactForm extends React.Component<ContactFormProps> {
     })
   }
 
+  onSubmitForm = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    this.props.onAddContact(this.state.name, this.state.number)
+    this.setState({ name: '', number: '' })
+  }
+
   render (): JSX.Element {
     return (
       <form
-        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-          e.preventDefault()
-          this.props.onAddContact(this.state.name, this.state.number)
-        }}
+        onSubmit={this.onSubmitForm}
         className={style.phoneBookForm}
         action="submit"
       >
